@@ -1,0 +1,77 @@
+<div class="container">
+    <h3>Add Customer</h3>
+    <div row>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div [hidden]="submitted" style="width: 400px;">
+                <form [formGroup] = "customerSaveForm" #savecustomer (ngSubmit)="saveCustomer(saveCustomer)">
+                    <!--Customer Name-->
+                    <div class="form-group">  
+                        <label for="name">Name</label> 
+                        <input type="text" class="form-control"  formControlName="name" data-toggle="tooltip"   
+                        data-placement="right" title="Enter Customer Name" > 
+                        
+                        <div class="alert alert-danger" *ngIf = "(Name.touched) && (Name.invalid)" style="margin-top: 5px;">  
+                        <span *ngIf="Name.errors.required">customer name is required</span>
+                            <span *ngIf = "Name.errors.minlength">  
+                                MinLength Error 
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--Customer Email-->
+                    <div class="form-group">  
+                        <label for="email">Email</label> 
+                        <input type="text" class="form-control"  formControlName="email" data-toggle="tooltip"   
+                        data-placement="right" title="Enter Customer Email" > 
+                        
+                        <div class="alert alert-danger" *ngIf = "(Name.touched) && (Name.invalid)" style="margin-top: 5px;">  
+                        <span *ngIf="Email.errors.required">customer email is required </span>
+                            <span *ngIf = "Email.errors.email">  
+                                Invalid Email Format 
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--Customer Phone-->
+                    <div class="form-group">  
+                        <label for="phone">Phone</label> 
+                        <input type="text" class="form-control"  formControlName="phone" data-toggle="tooltip"   
+                        data-placement="right" title="enter customer phone number" > 
+                        
+                        <div class="alert alert-danger" *ngIf = "(Name.touched) && (Name.invalid)" style="margin-top: 5px;">  
+                        <span *ngIf="Email.errors.required">customer phone number is required</span>
+                            <span *ngIf = "Email.errors.email">  
+                                Invalid Email Format 
+                            </span>
+                        </div>
+                    </div>
+
+                    <!--Customer Address-->
+                    <div class="form-group">  
+                        <label for="address">Address</label> 
+                        <input type="text" class="form-control"  formControlName="address" data-toggle="tooltip"   
+                        data-placement="right" title="enter customer address" > 
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Submit</button>  
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>  
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div [hidden] = "!submitted">
+            <h4>Customer Added Successfully!</h4>
+            <button (click)="resetAddCustomerForm" class='btn btn-primary'> Add More Customer</button>
+       </div>
+    </div>
+<div class="col-sm-4"></div>
+</div>
+    
+
+

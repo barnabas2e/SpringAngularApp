@@ -1,0 +1,111 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 style="text-align: center">Customers</h1><br>
+        <div class="row" [hidden] = "!deleteMessage">
+           
+        <div class="col-sm-4"></div>  
+        <div class="col-sm-4">  
+            <div class="alert alert-info alert-dismissible">     
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Customer Data Deleted</strong>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+<div class="panel-body cont">
+    
+    <table  class="table table-hover table-sm" datatable [dtOptions]="dtOptions"  [dtTrigger]="dtTrigger"  >
+
+        <thead class="thead-light">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cust of customers">
+                <td>{{cust.name}}</td>
+                <td>{{cust.email}}</td>
+                <td>{{cust.phone}}</td>
+                <td>{{cust.address}}</td>
+                <td>
+                    <button (click)="deleteCustomer(cust.id)" class="btn btn-danger btn-sm spacer">
+                        Delete
+                    </button>
+                    <button (click)="updateCustomer(cust.id)" class="btn btn-primary btn-sm spacer" data-toggle="modal" data-target="#myModal"> 
+                        Update
+                    </button>
+                </td>
+            </tr>
+        </tbody><br>
+    </table>
+</div>
+
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <form [formGroup]="customerUpdateForm" #updCust (ngSubmit)="updateCust(updCust)">
+                      <!--Modal Header-->
+                      <div class="modal-header">
+                          <h4 class="modal-title" style="text-align: center">Update Customer</h4>
+                      </div>
+
+                      <!-- Modal body-->
+                       <div class="modal-body" *ngFor="let cust of customerList">
+                           <div [hidden]="isUpdated">
+
+                                <input type="hidden" class="form-control" formControlName="id" [(ngModel)]="cust.id">
+                                
+                                <!--name form group-->
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" formControlName="name" [(ngModel)]="cust.name">
+                                </div>
+
+                                <!-- email form group-->
+                                <div class="form-group">
+                                    <label for="name">Email</label>
+                                    <input type="text" class="form-control" formControlName="email" [(ngModel)]="cust.email">
+                                </div>
+
+                                <!-- Phone form group-->
+                                <div class="form-group">
+                                    <label for="name">Phone</label>
+                                    <input type="text" class="form-control" formControlName="phone" [(ngModel)]="cust.phone">
+                                </div>
+
+                                <!-- Address form group-->
+                                <div class="form-group">
+                                    <label for="name">Address</label>
+                                    <input type="text" class="form-control" formControlName="address" [(ngModel)]="cust.address">
+                                </div>
+                           </div>
+                        
+                            <div [hidden]="!isUpdated">
+                                <h4>Customer Detail Updated!</h4>
+                            </div>          
+                        </div>
+                
+                    <!--Modal footer-->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" [hidden]="isUpdated">
+                            Update
+                        </button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="changeIsUpdate()">
+                            Close
+                        </button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

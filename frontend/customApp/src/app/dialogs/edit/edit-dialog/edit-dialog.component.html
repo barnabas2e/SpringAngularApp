@@ -1,0 +1,43 @@
+<div class="container">
+    <h3 mat-dialog-title>Customer Id: {{data.id}}</h3>
+
+    <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+        <!--Name-->
+        <div class="form">
+            <mat-form-field color="accent">
+                <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="data.name" name="name" required>
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!--Email-->
+        <div class="form">
+            <mat-form-field color="accent">
+                <input matInput #input class="form-control" placeholder="Email" [(ngModel)]="data.email" name="email" required>
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!--Phone-->
+        <div class="form">
+            <mat-form-field color="accent">
+                <input matInput #input class="form-control" placeholder="Phone" [(ngModel)]="data.phone" name="phone" required>
+                <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Address-->
+        <div class="form">
+            <mat-form-field color="accent">
+                <input matInput class="form-control" placeholder="Address" [(ngModel)]="data.address" name="address">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+            <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
+        </div>
+    </form>
+
+</div>
